@@ -1,4 +1,4 @@
-const API_BASE = '/api';
+const API_BASE = 'https://resumex-ai-67v8.onrender.com/api';
 
 /**
  * Analyzes resume (file or text) against Job Description (file or text)
