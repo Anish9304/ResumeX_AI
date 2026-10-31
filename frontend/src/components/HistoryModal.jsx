@@ -44,10 +44,10 @@ export default function HistoryModal({
           ) : (
             history.map((item) => (
               <div
-                key={item.id}
+                key={item.id || item._id}
                 className="group p-4 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-brand-500/40 hover:bg-slate-800/40 transition flex items-center justify-between gap-4 cursor-pointer"
                 onClick={() => {
-                  onSelectReport(item.id);
+                  onSelectReport(item.id || item._id);
                   onClose();
                 }}
               >
@@ -79,7 +79,7 @@ export default function HistoryModal({
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
-                      onDeleteReport(item.id);
+                      onDeleteReport(item.id || item._id);
                     }}
                     className="p-2 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 transition"
                     title="Delete report"

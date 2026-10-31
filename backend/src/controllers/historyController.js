@@ -6,7 +6,7 @@ export const getHistory = async (req, res) => {
     const list = await AnalysisRepository.find(30);
     // Return lightweight summary for the history list
     const summaries = list.map((item) => ({
-      id: item._id,
+      id: item._id ? item._id.toString() : item.id,
       fileName: item.fileName,
       targetJobTitle: item.targetJobTitle,
       atsScore: item.atsScore,

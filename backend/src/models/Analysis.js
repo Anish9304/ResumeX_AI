@@ -117,12 +117,15 @@ export const AnalysisRepository = {
   async deleteById(id) {
     if (getDbStatus()) {
       try {
-        await MongooseAnalysis.findByIdAndDelete(id);
+        const deletedDoc = await MongooseAnalysis.findByIdAndDelete(id);
+        if (deletedDoc) return true;
       } catch (err) {
-        // continue
+        console.warn('MongoDB delete failed or cast error, checking in-memory store:', err.message);
       }
     }
-    const idx = inMemoryStore.findIndex((item) => item._id.toString() === id.toString());
+    const idx = inMemoryStore.findIndex(
+      (item) => item._id && item._id.toString() === id.toString()
+    );
     if (idx !== -1) {
       inMemoryStore.splice(idx, 1);
       return true;

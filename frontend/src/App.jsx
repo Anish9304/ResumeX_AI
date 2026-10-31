@@ -227,8 +227,14 @@ export default function App() {
   const handleDeleteReport = async (id) => {
     try {
       await deleteHistoryItemApi(id);
-      setHistory((prev) => prev.filter((item) => item.id !== id));
-      showToast('Report deleted', 'info');
+      setHistory((prev) =>
+        prev.filter(
+          (item) =>
+            item.id?.toString() !== id.toString() &&
+            item._id?.toString() !== id.toString()
+        )
+      );
+      showToast('Report deleted successfully', 'info');
     } catch (err) {
       showToast('Failed to delete report: ' + err.message, 'error');
     }
